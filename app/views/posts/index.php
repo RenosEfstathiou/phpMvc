@@ -10,7 +10,7 @@
     </div>
 </div>
 <?php foreach ($data['posts'] as $post) : ?>
-    <?php flash("") ?>
+    <?php flash('post_message'); ?>
     <div class="card card-body mb-3">
         <h4 class="card-title"><?php echo $post->post_title ?></h4>
         <div class="bg-light p-2 mb-3">

@@ -39,4 +39,46 @@ class Post
             return false;
         }
     }
+
+    public function  getPostById($id)
+    {
+        $query = "SELECT * FROM posts where post_id = :id";
+        $this->db->query($query);
+        $this->db->bind(":id", $id);
+
+        $res = $this->db->single();
+
+        return $res;
+    }
+
+
+    public function updatePost($data)
+    {
+        $query = "UPDATE posts
+        SET 
+            post_title= :title, 
+            post_body= :body
+        WHERE  post_id= :id ";
+        $this->db->query($query);
+        // Bind values to query
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':id', $data['id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deletePost($id)
+    {
+        $query = "DELETE FROM posts  WHERE post_id= :id ";
+        $this->db->query($query);
+        $this->db->bind(":id", $id);
+        if ($this->db->execute())
+            return true;
+        else
+            return  false;
+    }
 }
